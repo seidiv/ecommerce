@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "byekan";
+    src: url("./Yekan.ttf");
+    src: url("./BYekan.ttf");
+    font-style: normal;
+    font-weight: 200;
+}
+
+body {
+    font-family: "byekan" !important;
+    direction: rtl;
+}
+
+main {
+    min-height: 80vh;
+}
+strong {
+    font-family: sans-serif !important;
+}
+
+h3 {
+    padding: 1rem 0;
+}
+
+.rating span {
+    margin: 0.1rem;
+    float: right;
+}
