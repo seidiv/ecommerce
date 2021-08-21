@@ -69,6 +69,15 @@ def getMyOrders(request):
     serializer = OrderSerializer(orders , many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+ 
+    orders = Order.objects.all() 
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getOrderById(request , pk):
@@ -91,5 +100,15 @@ def updateOrderToPaid(request , pk):
     order = Order.objects.get(_id=pk)   
     order.isPaid = True 
     order.paidAt = datetime.now()
+    order.save()
+    return Response('سفارش پرداخت شد')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateOrderToDelivered(request, pk):
+    order = Order.objects.get(_id=pk)
+    order.isDelivered = True
+    order.deleveredAt = datetime.now()
     order.save()
     return Response('سفارش پرداخت شد')
