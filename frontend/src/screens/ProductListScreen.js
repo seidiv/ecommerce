@@ -4,6 +4,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Paginate from "../components/Paginate";
 import {
     listProducts,
     deleteProduct,
@@ -96,56 +97,65 @@ function ProductListScreen({ history, match }) {
             ) : error ? (
                 <Message variant="danger">{error}</Message>
             ) : (
-                <Table striped bordered responsive hover className="table-sm">
-                    <thead>
-                        <tr>
-                            <th>شناسه</th>
-                            <th>نام</th>
-                            <th>قیمت</th>
-                            <th>دسته</th>
-                            <th>برند</th>
+                <div>
+                    <Table
+                        striped
+                        bordered
+                        responsive
+                        hover
+                        className="table-sm"
+                    >
+                        <thead>
+                            <tr>
+                                <th>شناسه</th>
+                                <th>نام</th>
+                                <th>قیمت</th>
+                                <th>دسته</th>
+                                <th>برند</th>
 
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product._id}>
-                                <td>{product._id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.price} تومان</td>
-                                <td>{product.category}</td>
-                                <td>{product.brand}</td>
-
-                                <td>
-                                    <LinkContainer
-                                        to={`/admin/product/${product._id}/edit`}
-                                    >
-                                        <Button
-                                            variant="light"
-                                            className="btn-sm"
-                                        >
-                                            <i
-                                                className="fas fa-edit"
-                                                style={{ color: "green" }}
-                                            ></i>
-                                        </Button>
-                                    </LinkContainer>
-
-                                    <Button
-                                        variant="danger"
-                                        className="btn-sm"
-                                        onClick={() =>
-                                            deleteHandler(product._id)
-                                        }
-                                    >
-                                        <i className="fas fa-trash"></i>
-                                    </Button>
-                                </td>
+                                <th></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr key={product._id}>
+                                    <td>{product._id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.price} تومان</td>
+                                    <td>{product.category}</td>
+                                    <td>{product.brand}</td>
+
+                                    <td>
+                                        <LinkContainer
+                                            to={`/admin/product/${product._id}/edit`}
+                                        >
+                                            <Button
+                                                variant="light"
+                                                className="btn-sm"
+                                            >
+                                                <i
+                                                    className="fas fa-edit"
+                                                    style={{ color: "green" }}
+                                                ></i>
+                                            </Button>
+                                        </LinkContainer>
+
+                                        <Button
+                                            variant="danger"
+                                            className="btn-sm"
+                                            onClick={() =>
+                                                deleteHandler(product._id)
+                                            }
+                                        >
+                                            <i className="fas fa-trash"></i>
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                        <Paginate pages={pages} page={page} isAdmin={true}/>
+                    </Table>
+                </div>
             )}
         </div>
     );

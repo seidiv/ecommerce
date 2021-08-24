@@ -64,7 +64,7 @@ function Rating({ value, text, color }) {
                     }
                 ></i>
             </span>
-            <span> از {text && text} </span>
+            <span> {text && text} </span>
         </div>
     );
 }

@@ -3,16 +3,17 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Nav, Container, Navbar, Row, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { logout } from '../actions/userActions'
+import SearchBox from "./SearchBox";
+import { logout } from "../actions/userActions";
 function Header() {
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const logoutHandler = () => {
-        dispatch(logout())
+        dispatch(logout());
     };
     return (
-        <header style={{ direction: "rtl !important" }}>
+        <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapsOnSelect>
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -70,8 +71,10 @@ function Header() {
                             )}
                         </Nav>
                     </Navbar.Collapse>
+                    <SearchBox />
+
                     <LinkContainer to="/">
-                        <Navbar.Brand>ADTools</Navbar.Brand>
+                        <Navbar.Brand className='navbar-brand'>kaveh tools</Navbar.Brand>
                     </LinkContainer>
                 </Container>
             </Navbar>
